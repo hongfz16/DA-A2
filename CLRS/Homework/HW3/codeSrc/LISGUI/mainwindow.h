@@ -13,6 +13,7 @@
 #include <vector>
 #include <iostream>
 #include <ctime>
+#include <algorithm>
 #include "LIS.h"
 
 using namespace std;

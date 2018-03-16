@@ -45,6 +45,7 @@ int getLISLen(vector<int>& arr,vector<int>& dp)
 
 void getLISIndex(vector<int>& arr,vector<int>& dp,vector<int>& indexarr,int len)
 {
+    indexarr.resize(len+1,0);
     vector<int> index;
 	index.resize(len+1,0);
 	index[len+1]=2147483647;
@@ -67,8 +68,7 @@ int naiveGetLIS(vector<int>& arr)
 	dpLength[0]=1;
 	for(int i=1;i<arr.size();++i)
 	{
-		int j=i-1;
-		int maxl=dpLength[j];
+        int j=i-1;
 		for(j=0;j<i;++j)
 		{
 			if(arr[j]<arr[i] && dpLength[j]+1>dpLength[i])
