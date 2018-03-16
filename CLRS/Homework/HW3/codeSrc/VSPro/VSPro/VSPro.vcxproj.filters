@@ -15,48 +15,48 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\SortExp\32UIntRand.h">
+    <ClInclude Include="32UIntRand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\SortExp\hdrs.h">
+    <ClInclude Include="hdrs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\SortExp\insertionsort.h">
+    <ClInclude Include="insertionsort.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\SortExp\mergesort.h">
+    <ClInclude Include="mergesort.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\SortExp\quicksort.h">
+    <ClInclude Include="quicksort.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\SortExp\radixsort.h">
+    <ClInclude Include="radixsort.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\SortExp\shellsort.h">
+    <ClInclude Include="shellsort.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\SortExp\32UIntRand.cpp">
+    <ClCompile Include="32UIntRand.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\SortExp\insertionsort.cpp">
+    <ClCompile Include="insertionsort.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\SortExp\main.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\SortExp\mergesort.cpp">
+    <ClCompile Include="mergesort.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\SortExp\quicksort.cpp">
+    <ClCompile Include="quicksort.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\SortExp\radixsort.cpp">
+    <ClCompile Include="radixsort.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\SortExp\shellsort.cpp">
+    <ClCompile Include="shellsort.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
   </ItemGroup>

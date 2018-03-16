@@ -18,6 +18,24 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="32UIntRand.h" />
+    <ClInclude Include="hdrs.h" />
+    <ClInclude Include="insertionsort.h" />
+    <ClInclude Include="mergesort.h" />
+    <ClInclude Include="quicksort.h" />
+    <ClInclude Include="radixsort.h" />
+    <ClInclude Include="shellsort.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="32UIntRand.cpp" />
+    <ClCompile Include="insertionsort.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="mergesort.cpp" />
+    <ClCompile Include="quicksort.cpp" />
+    <ClCompile Include="radixsort.cpp" />
+    <ClCompile Include="shellsort.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{241A8D0A-769F-48FF-9650-544ACF807EC8}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -141,24 +159,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\SortExp\32UIntRand.h" />
-    <ClInclude Include="..\..\SortExp\hdrs.h" />
-    <ClInclude Include="..\..\SortExp\insertionsort.h" />
-    <ClInclude Include="..\..\SortExp\mergesort.h" />
-    <ClInclude Include="..\..\SortExp\quicksort.h" />
-    <ClInclude Include="..\..\SortExp\radixsort.h" />
-    <ClInclude Include="..\..\SortExp\shellsort.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\SortExp\32UIntRand.cpp" />
-    <ClCompile Include="..\..\SortExp\insertionsort.cpp" />
-    <ClCompile Include="..\..\SortExp\main.cpp" />
-    <ClCompile Include="..\..\SortExp\mergesort.cpp" />
-    <ClCompile Include="..\..\SortExp\quicksort.cpp" />
-    <ClCompile Include="..\..\SortExp\radixsort.cpp" />
-    <ClCompile Include="..\..\SortExp\shellsort.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
