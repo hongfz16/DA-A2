@@ -77,18 +77,19 @@ int MainWindow::GetInputArr(vector<int> &arr)
 
 void MainWindow::GetAns(vector<int> &arr)
 {
-    vector<int> dp;
+    vector<int> dp,indexarr;
     clock_t cctime=clock();
-    int len=getLISLen(arr,dp);
+    int len=getLISLen(arr,dp,indexarr);
+    for(int i=0;i<indexarr.size();++i)
+        cout<<arr[indexarr[i]]<<" ";
+    cout<<endl;
     cctime=clock()-cctime;
-    vector<int> indexarr;
-    getLISIndex(arr,dp,indexarr,len);
     mytime->setText(QString("Time: ")+QString::number(static_cast<int>(cctime))+QString("ms"));
     mylength->setText(QString("Length of LIS: ")+QString::number(len));
     QString htmlstr("<p>");
     for(int i=0;i<arr.size();++i)
     {
-        if(std::find(indexarr.begin()+1,indexarr.begin()+len+1,i)!=indexarr.end())
+        if(std::find(indexarr.begin(),indexarr.end(),i)!=indexarr.end())
             htmlstr+=QString("<font color=\"#FF0000\">")+QString::number(arr[i])+QString("</font>&nbsp;");
         else
             htmlstr+=QString::number(arr[i])+QString("&nbsp;");
