@@ -9,6 +9,12 @@ using namespace std;
 bool increase(vector<int>& arr,vector<int>& index)
 {
 	for(int i=0;i<index.size()-1;++i)
+		if(index[i]>index[i+1])
+		{
+			cout<<"index error!"<<endl;
+			return false;
+		}
+	for(int i=0;i<index.size()-1;++i)
 	{
 		if(arr[index[i]]>arr[index[i+1]])
 			return false;
@@ -31,9 +37,9 @@ bool test(int num)
 	arr.resize(num,0);
 	for(size_t i=0;i<num;++i)
 	{
-	 	arr[i]=rand()%100;
+	 	arr[i]=rand()%10000;
 	 	while(arr[i]==0)
-	 		arr[i]=rand()%100;
+	 		arr[i]=rand()%10000;
 	}
 	vector<int> dp,index;
 	int len=getLISLen(arr,dp,index);
