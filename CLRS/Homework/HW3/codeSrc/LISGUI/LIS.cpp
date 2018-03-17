@@ -47,7 +47,7 @@ void getLISIndex(vector<int>& arr,vector<int>& dp,vector<int>& indexarr,int len)
 {
     indexarr.resize(len+1,0);
     vector<int> index;
-	index.resize(len+1,0);
+    index.resize(len+2,0);
 	index[len+1]=2147483647;
 	for(int i=arr.size()-1;i>=0;--i)
 	{
