@@ -24,11 +24,14 @@ int bisearch(vector<int>& arr,int low,int high,int k)
 int getLISLen(vector<int>& arr,vector<int>& dp,vector<int>& index)
 {
 	vector<int> dpindex;
+	vector<int> dppre;
+	dppre.resize(arr.size(),0);
 	dpindex.resize(arr.size()+2,0);
 	if(arr.size()==0)
 		return 0;
 	dp.resize(arr.size()+2,0);
 	dp[1]=arr[0];
+	index.push_back(0);
 	int len=1;
 	for(size_t i=1;i<arr.size();++i)
 	{
@@ -39,16 +42,26 @@ int getLISLen(vector<int>& arr,vector<int>& dp,vector<int>& index)
 		{
 			dp[temp]=arr[i];
 			dpindex[temp]=i;
+			dppre[i]=dpindex[temp-1];
 			if(temp==len+1)
 			{
 				++len;
-				index.clear();
-				for(int i=0;i<len;++i)
-				{
-					index.push_back(dpindex[i+1]);
-				}
+				//index.clear();
+				// for(int i=0;i<len-1;++i)
+				// {
+				// 	index[i]=dpindex[i+1];
+				// }
+				dppre[i]=dpindex[temp-1];
 			}
 		}
+	}
+	index.resize(len,0);
+	int count=dpindex[len];
+	index[len-1]=count;
+	for(int i=len-2;i>=0;--i)
+	{
+		index[i]=dppre[count];
+		count=dppre[count];
 	}
 	return len;
 }
