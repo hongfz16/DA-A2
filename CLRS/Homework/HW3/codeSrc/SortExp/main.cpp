@@ -1,5 +1,8 @@
 #include "hdrs.h"
 
+#include "algorithm"
+#include "vector"
+
 using namespace std;
 
 bool check(unsigned int* arr,int num)
@@ -110,24 +113,43 @@ void printtime(string name,clock_t time)
 
 int main()
 {
-	cout << RAND_MAX << endl;
-	return 0;
 	srand((unsigned)time(nullptr));
 	int num=10;
 	clock_t time;
-	for(int i=0;i<9;++i,num*=10)
+	for(int i=0;i<10;++i)
 	{
-		//time=insertionsorttest(num);
-		//printtime("Insertion",time);
-		time=mergesorttest(num,50);
-		printtime("Merge",time);
-		time=quicksorttest(num,50);
-		printtime("Quick",time);
-		//time=shellsorttest(num);
-		//printtime("Shell",time);
 		time=radixsorttest(num,8);
 		printtime("Radix",time);
+		time=quicksorttest(num,50);
+		printtime("Quick",time);
+		time=mergesorttest(num,50);
+		printtime("Merge",time);
+		if(i<=5)
+		{
+			time=shellsorttest(num);
+			printtime("Shell",time);
+		}
+		if(i<=4)
+		{
+			time=insertionsorttest(num);
+			printtime("Insertion",time);
+		}
 		cout<<"==============="<<endl;
+		if(num==100000000)
+			num*=2;
+		else if(num==200000000)
+			num*=5;
+		else
+			num*=10;
 	}
+	// int size=1000000000;
+	// int* testarr=new int[size];
+	// for(int i=0;i<size;++i)
+	// {
+	// 	testarr[i]=rand();
+	// }
+	// clock_t time=clock();
+	// sort(testarr,testarr+size);
+	// cout<<(clock()-time)<<endl;
 	return 0;
 }
