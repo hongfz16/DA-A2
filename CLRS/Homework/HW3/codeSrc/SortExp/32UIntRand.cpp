@@ -4,11 +4,7 @@ using namespace std;
 
 unsigned int UInt32Rand()
 {
-	unsigned int rd=static_cast<unsigned int>(rand());
-	int flag=rand()%2;
-	if(flag==0)
-		return (rd<<1);
-	else
-		return (rd<<1)+1;
-	//return static_cast<unsigned int >(rand()%100);
+	unsigned int rdhigh=(static_cast<unsigned int>(rand())<<1)+rand()%2;
+	unsigned int rdlow = (static_cast<unsigned int>(rand())<<1)+rand()%2;
+	return (rdhigh << 16) + rdlow;
 }

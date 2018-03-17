@@ -104,12 +104,14 @@ clock_t radixsorttest(int num,int r)
 
 void printtime(string name,clock_t time)
 {
-	cout<<name<<" Sort: "<<time/1000<<" ms"<<endl;
+	cout<<name<<" Sort: "<<time<<" ms"<<endl;
 	cout<<"-----"<<endl;
 }
 
 int main()
 {
+	cout << RAND_MAX << endl;
+	return 0;
 	srand((unsigned)time(nullptr));
 	int num=10;
 	clock_t time;
@@ -129,91 +131,3 @@ int main()
 	}
 	return 0;
 }
-
-// Merge Sort Correct! Array Size: 10
-// Merge Sort: 0 ms
-// -----
-// Quick Sort Correct! Array Size: 10
-// Quick Sort: 0 ms
-// -----
-// Radix Sort Correct! Array Size: 10
-// Radix Sort: 0 ms
-// -----
-// ===============
-// Merge Sort Correct! Array Size: 100
-// Merge Sort: 0 ms
-// -----
-// Quick Sort Correct! Array Size: 100
-// Quick Sort: 0 ms
-// -----
-// Radix Sort Correct! Array Size: 100
-// Radix Sort: 0 ms
-// -----
-// ===============
-// Merge Sort Correct! Array Size: 1000
-// Merge Sort: 0 ms
-// -----
-// Quick Sort Correct! Array Size: 1000
-// Quick Sort: 0 ms
-// -----
-// Radix Sort Correct! Array Size: 1000
-// Radix Sort: 0 ms
-// -----
-// ===============
-// Merge Sort Correct! Array Size: 10000
-// Merge Sort: 2 ms
-// -----
-// Quick Sort Correct! Array Size: 10000
-// Quick Sort: 1 ms
-// -----
-// Radix Sort Correct! Array Size: 10000
-// Radix Sort: 2 ms
-// -----
-// ===============
-// Merge Sort Correct! Array Size: 100000
-// Merge Sort: 27 ms
-// -----
-// Quick Sort Correct! Array Size: 100000
-// Quick Sort: 19 ms
-// -----
-// Radix Sort Correct! Array Size: 100000
-// Radix Sort: 14 ms
-// -----
-// ===============
-// Merge Sort Correct! Array Size: 1000000
-// Merge Sort: 261 ms
-// -----
-// Quick Sort Correct! Array Size: 1000000
-// Quick Sort: 236 ms
-// -----
-// Radix Sort Correct! Array Size: 1000000
-// Radix Sort: 138 ms
-// -----
-// ===============
-// Merge Sort Correct! Array Size: 10000000
-// Merge Sort: 3130 ms
-// -----
-// Quick Sort Correct! Array Size: 10000000
-// Quick Sort: 2682 ms
-// -----
-// Radix Sort Correct! Array Size: 10000000
-// Radix Sort: 1260 ms
-// -----
-// ===============
-// Merge Sort Correct! Array Size: 100000000
-// Merge Sort: 37055 ms
-// -----
-// Quick Sort Correct! Array Size: 100000000
-// Quick Sort: 31168 ms
-// -----
-// Radix Sort Correct! Array Size: 100000000
-// Radix Sort: 13359 ms
-// -----
-// ===============
-// Merge Sort Correct! Array Size: 1000000000
-// Merge Sort: 473326 ms
-// -----
-// Quick Sort Correct! Array Size: 1000000000
-// Quick Sort: 382163 ms
-// -----
-// ^C
