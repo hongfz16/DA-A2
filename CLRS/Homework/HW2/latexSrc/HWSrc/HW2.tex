@@ -1,0 +1,76 @@
+%!TEX program = xelatex
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
+\documentclass[12pt]{article}
+
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{fontspec,xltxtra,xunicode}
+\usepackage{setspace}
+
+\defaultfontfeatures{Mapping=tex-text}
+\setromanfont{Heiti SC}
+\XeTeXlinebreaklocale “zh”
+
+\title{Homework2 Solution}
+\author{洪方舟\\Student ID: 2016013259\\Email: \href{mailto:hongfz16@163.com}{hongfz16@163.com}}
+
+\geometry{left=2cm,right=2cm,top=1cm,bottom=2cm}
+\renewcommand{\baselinestretch}{1.5}
+
+\begin{document}
+  \maketitle
+  \section*{2. \textbf{证明:}}
+  	设$E_{ij}(i<j)$为数组$P$中$P[i]$与$P[j]$元素相同的事件，存在元素不唯一的概率可以表达为$P\left(\bigcup\limits_{i<j} E_{ij}\right)$，则所有元素都唯一的概率$P(x)$为
+  	\begin{equation*}
+  	  P(x)=1-P\left(\bigcup\limits_{i<j} E_{ij}\right) \geq 1-\sum_{i<j} P(E_{ij})
+  	\end{equation*}
+  	又因为$P(E_{ij})=\frac{1}{n^3}$，所以
+  	\begin{align*}
+  	  P(x) &\geq 1 - \frac{n(n-1)}{2}\frac{1}{n^3}\\
+  	  &=1-\frac{1}{2n}+\frac{1}{2n^2}\\
+  	  &\geq 1 - \frac{1}{n}
+  	\end{align*}
+  	则数组$P$中所有元素都唯一的概率至少是$1-\frac{1}{n}$，证毕！
+  \section*{3. \textbf{解:}}
+    \subsection*{a.}
+      取出恰好为$i$的概率为$\frac{1}{n-2}$，从剩下的$n-1$个数中要一个数在前$i-1$个，另一个在后$n-i$个数中，则可得$p_i$的准确表达式为
+      \begin{equation*}
+        p_i=\frac{6(i-1)(n-i)}{(n-2)(n-1)n}
+      \end{equation*}
+    \subsection*{b.}
+      若选择$x=A'[\lfloor (n+1)/2 \rfloor]$，则有
+      \begin{align*}
+        p_x &= \frac{6\left( \lfloor \frac{n+1}{2} \rfloor -1 \right)(n-\lfloor \frac{n+1}{2} \rfloor)}{(n-2)(n-1)n}\\
+        &=\left\{
+        \begin{aligned}
+          \frac{3(n-1)}{2n(n-2)}，当n为奇数时\\
+          \frac{3}{2(n-1)}，当n为偶数时
+        \end{aligned}
+        \right.
+      \end{align*}
+      平凡实现中，选择$x=A'[\lfloor (n+1)/2 \rfloor]$的概率为$p_{平凡}=\frac{1}{n}$，将两者相除可得三数取中法概率增加为
+      \begin{align*}
+        \frac{p_x}{p_{平凡}}=\left\{
+        \begin{aligned}
+          \frac{3(n-1)}{2(n-2)}，当n为奇数\\
+          \frac{3n}{2(n-1)}，当n为偶数
+        \end{aligned}
+        \right.
+      \end{align*}
+      假设$n \rightarrow \infty$，$p_x=0$，$\frac{p_x}{p_{平凡}}=\frac{3}{2}$
+    \subsection*{c.}
+      \begin{align*}
+        Pr\{x=A'[i],n/3 \leq i \leq 2n/3\} &= \sum_{i=n/3}^{2n/3}p_i\\
+        &=\sum_{i=n/3}^{2n/3}\frac{6(i-1)(n-i)}{(n-2)(n-1)n}\\
+        &=\int_{n/3}^{2n/3}\frac{6(x-1)(n-x)}{(n-2)(n-1)n}dx\\
+        &=\frac{13n^2-27n}{27(n-1)(n-2)}
+      \end{align*}
+    平凡实现中，$p_{平凡}=\frac{1}{3}$，显然有$Pr\{x=A'[i],n/3 \leq i \leq 2n/3\} > \frac{1}{3}$，增加的概率为
+      \begin{align*}
+        \frac{Pr\{x=A'[i],n/3 \leq i \leq 2n/3\}}{p_{平凡}}=\frac{13n^2-27n}{9(n-1)(n-2)}
+      \end{align*}
+    \subsection*{d.}
+      对于在证明快排期望时间的时候所定义的指示变量$X_k$，平凡方法中$E[X_k]=1/n$，而在三数取中法中为$E[X_k]=\frac{6(k-1)(n-k)}{(n-2)(n-1)n}=\Theta\left(\frac{1}{n}\right)$，所以三数取中法并没有对证明过程产生数量级上的影响，因此三数取中法所得的最后结果仍然为$\Omega(nlgn)$，因此三数取中法仅影响常数项因子。
+\end{document}

@@ -1,0 +1,80 @@
+%!TEX program = xelatex
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
+\documentclass[12pt]{article}
+
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{fontspec,xltxtra,xunicode}
+\usepackage{setspace}
+\usepackage{algorithm}  
+\usepackage{algorithmicx}  
+\usepackage{algpseudocode}  
+  
+%\floatname{algorithm}{OPTIMAL-BST}
+\renewcommand{\algorithmicrequire}{\textbf{输入:}}
+\renewcommand{\algorithmicensure}{\textbf{输出:}}
+
+\defaultfontfeatures{Mapping=tex-text}
+\setromanfont{Heiti SC}
+\XeTeXlinebreaklocale “zh”
+
+\title{Homework2 Solution}
+\author{洪方舟\\Student ID: 2016013259\\Email: \href{mailto:hongfz16@163.com}{hongfz16@163.com}}
+
+\geometry{left=2cm,right=2cm,top=1cm,bottom=2cm}
+\renewcommand{\baselinestretch}{1.5}
+
+\begin{document}
+  \maketitle
+  \section*{Ex8.4-4 \textbf{解：}}
+  	使用桶排序的思想，需要将圆分为$n$个相同面积的同心圆环;\\
+  	不妨设半径的序列为$a_0,a_1,\ldots,a_{n-1}$，其中$a_0=0$，由面积相等可得，$i\geq1$时
+  	\begin{align*}
+  	  \pi(a_i^2-a_{i-1}^2) &= \frac{\pi}{n}\\
+  	  a_i^2 &= \frac{1}{n}+a_{i-1}^2\\
+  	  a_i &= \sqrt{\frac{1}{n}+a_{i-1}^2}
+  	\end{align*}
+  	下面由数学归纳法证明$a_i=\sqrt{\frac{i}{n}}$\\
+  	假设$n=k$时，$a_k=\sqrt{\frac{k}{n}}$成立\\
+  	则当$n=k+1$时，$a_{k+1}=\sqrt{\frac{1}{n}+a_k^2}=\sqrt{\frac{k+1}{n}}$\\
+  	由数学归纳法可知$a_i=\sqrt{\frac{i}{n}},0\leq i \leq n-1$\\
+  	则按照上面描述的半径序列取出同心圆环作为“桶”，则可以达到$\Theta(n)$的排序复杂度。
+  \section*{Ex15.5-4 \textbf{解：}}
+    \begin{algorithm}  
+        \caption{OPTIMAL-BST-IMPROVED}
+        \begin{algorithmic}[1]  
+            \Require $p,q,n$
+            \Ensure $e,root$
+            \Function {OPTIMAL-BST-IMPROVED}{$p,q,n$}
+                \State let $e[1..n+1,0..n],\omega[1..n+1,0..n],$ and $root[1..n,1..n]$be new tables
+                \For{$i=1$ to $n+1$}
+                	\State$e[i,i-1]=q_{i-1}$
+                	\State$\omega[i,i-1]=q_{i-1}$
+                \EndFor
+               	\For{$l=1$ to $n$}
+               		\For{$i=1$ to $n-l+1$}
+               			\State$j=i+l-1$
+               			\State$e[i,j]=\infty$
+               			\State$\omega[i,j]=\omega[i,j-1]+p_j+q_j$
+               			\If{$i==j$}
+               				\State $e[i,j]=e[i,j-1]+e[j+1,j]+\omega[i,j]$
+               				\State $root[i,j]=j$
+               			\Else
+               				\For{$r=root[i,j-1]$ to $root[i+1,j]$}
+               					\State $t=e[i,r-1]+e[r+1,j]+\omega[i,j]$
+               					\If{$t<e[i,j]$}
+               						\State $e[i,j]=t$
+               						\State $root[i,j]=r$
+               					\EndIf
+               				\EndFor
+               			\EndIf
+               		\EndFor
+               	\EndFor
+               	\State \Return $e$ and $root$
+            \EndFunction
+        \end{algorithmic}
+    \end{algorithm}
+    第16行的$for$循环（原书第10行）经过改进后，可以做到第二层循环（第8行）加上第三层循环为$\Theta(n)$的时间复杂度，则可以达到总共$\Theta(n^2)$的复杂度。
+\end{document}
