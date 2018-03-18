@@ -7,8 +7,7 @@
 using namespace std;
 
 int bisearch(vector<int>& arr,int low,int high,int k);
-int getLISLen(vector<int>& arr,vector<int>& dp);
-void getLISIndex(vector<int>& arr, vector<int>& dp, vector<int>& indexarr, int len);
+int getLISLen(vector<int>& arr,vector<int>& dp,vector<int>& index);
 int naiveGetLIS(vector<int>& arr);
 
 #endif //_LIS_H_

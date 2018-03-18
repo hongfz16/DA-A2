@@ -2,6 +2,23 @@
 
 using namespace std;
 
+int getshelldelta(int** delta,int n)
+{
+	(*delta) = new int[32];
+	(*delta)[0] = n / 3;
+	int count = 1;
+	for (int i = 1; (*delta)[i-1] > 1; ++i)
+	{
+		(*delta)[i] = (*delta)[i - 1] / 2.2;
+		count++;
+	}
+	if((*delta)[count-1]==0)
+	{
+		(*delta)[count - 1] = 1;
+	}
+	return count;
+}
+
 void shellinsert(unsigned int* srcarr,int num,int d)
 {
 	for(int i=d;i<num;++i)

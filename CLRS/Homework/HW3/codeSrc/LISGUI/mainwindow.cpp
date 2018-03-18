@@ -48,7 +48,10 @@ int MainWindow::GetInputArr(vector<int> &arr)
     if(numstr.isEmpty())
         return -1;
     int temp=0;
-    for(int i=0;i<numstr.size();++i)
+    int j=0;
+    while(j<numstr.size() && numstr[j]==' ')
+        j++;
+    for(int i=j;i<numstr.size();++i)
     {
         if(numstr[i]!=' ' && (numstr[i]>'9' || numstr[i]<'0'))
             return -1;
@@ -62,6 +65,9 @@ int MainWindow::GetInputArr(vector<int> &arr)
         {
             arr.push_back(temp);
             temp=0;
+            while(i<numstr.size() && numstr[i]==' ')
+                ++i;
+            --i;
         }
     }
     if(numstr[numstr.size()-1]!=' ')
@@ -71,18 +77,19 @@ int MainWindow::GetInputArr(vector<int> &arr)
 
 void MainWindow::GetAns(vector<int> &arr)
 {
-    vector<int> dp;
+    vector<int> dp,indexarr;
     clock_t cctime=clock();
-    int len=getLISLen(arr,dp);
+    int len=getLISLen(arr,dp,indexarr);
+    for(int i=0;i<indexarr.size();++i)
+        cout<<arr[indexarr[i]]<<" ";
+    cout<<endl;
     cctime=clock()-cctime;
-    vector<int> indexarr;
-    getLISIndex(arr,dp,indexarr,len);
     mytime->setText(QString("Time: ")+QString::number(static_cast<int>(cctime))+QString("ms"));
     mylength->setText(QString("Length of LIS: ")+QString::number(len));
     QString htmlstr("<p>");
     for(int i=0;i<arr.size();++i)
     {
-        if(std::find(indexarr.begin()+1,indexarr.end(),i)!=indexarr.end())
+        if(std::find(indexarr.begin(),indexarr.end(),i)!=indexarr.end())
             htmlstr+=QString("<font color=\"#FF0000\">")+QString::number(arr[i])+QString("</font>&nbsp;");
         else
             htmlstr+=QString::number(arr[i])+QString("&nbsp;");

@@ -79,9 +79,13 @@ clock_t quicksorttest(int num,int stoppoint)
 clock_t shellsorttest(int num)
 {
 	unsigned int* arr=generateArr(num);
-	int delta[4]={10,5,3,1};
+	int* delta;
+	int count = getshelldelta(&delta, num);
+	//for (int i = 0; i < count; ++i)
+	//	cout << delta[i] << " ";
+	//cout << endl;
 	clock_t start=clock();
-	shellsort(arr,num,delta,4);
+	shellsort(arr,num,delta,count);
 	clock_t end=clock();
 	if(check(arr,num))
 		cout<<"Shell Sort Correct! Array Size: "<<num<<endl;
@@ -124,12 +128,12 @@ int main()
 		printtime("Quick",time);
 		time=mergesorttest(num,50);
 		printtime("Merge",time);
-		if(i<=5)
+		if(i<=8)
 		{
 			time=shellsorttest(num);
 			printtime("Shell",time);
 		}
-		if(i<=4)
+		if(i<=5)
 		{
 			time=insertionsorttest(num);
 			printtime("Insertion",time);

@@ -21,12 +21,17 @@ int bisearch(vector<int>& arr,int low,int high,int k)
 	return -1;
 }
 
-int getLISLen(vector<int>& arr,vector<int>& dp)
+int getLISLen(vector<int>& arr,vector<int>& dp,vector<int>& index)
 {
+	vector<int> dpindex;
+	vector<int> dppre;
+	dppre.resize(arr.size(),0);
+	dpindex.resize(arr.size()+2,0);
 	if(arr.size()==0)
 		return 0;
 	dp.resize(arr.size()+2,0);
 	dp[1]=arr[0];
+	index.push_back(0);
 	int len=1;
 	for(size_t i=1;i<arr.size();++i)
 	{
@@ -36,30 +41,29 @@ int getLISLen(vector<int>& arr,vector<int>& dp)
 		else
 		{
 			dp[temp]=arr[i];
+			dpindex[temp]=i;
+			dppre[i]=dpindex[temp-1];
 			if(temp==len+1)
+			{
 				++len;
+				//index.clear();
+				// for(int i=0;i<len-1;++i)
+				// {
+				// 	index[i]=dpindex[i+1];
+				// }
+				dppre[i]=dpindex[temp-1];
+			}
 		}
+	}
+	index.resize(len,0);
+	int count=dpindex[len];
+	index[len-1]=count;
+	for(int i=len-2;i>=0;--i)
+	{
+		index[i]=dppre[count];
+		count=dppre[count];
 	}
 	return len;
-}
-
-void getLISIndex(vector<int>& arr,vector<int>& dp,vector<int>& indexarr,int len)
-{
-    indexarr.resize(len+1,0);
-    vector<int> index;
-	index.resize(len+1,0);
-	index[len+1]=2147483647;
-	for(int i=arr.size()-1;i>=0;--i)
-	{
-		if(len==0)
-			break;
-		if(arr[i]>=dp[len] && arr[i]<index[len+1])
-		{
-			index[len]=arr[i];
-            indexarr[len]=i;
-			--len;
-		}
-	}
 }
 
 int naiveGetLIS(vector<int>& arr)
@@ -68,7 +72,8 @@ int naiveGetLIS(vector<int>& arr)
 	dpLength[0]=1;
 	for(int i=1;i<arr.size();++i)
 	{
-        int j=i-1;
+		int j=i-1;
+		int maxl=dpLength[j];
 		for(j=0;j<i;++j)
 		{
 			if(arr[j]<arr[i] && dpLength[j]+1>dpLength[i])
@@ -81,5 +86,6 @@ int naiveGetLIS(vector<int>& arr)
 	for(int i=0;i<arr.size();++i)
 		if(dpLength[i]>maxre)
 			maxre=dpLength[i];
+
 	return maxre;
 }
