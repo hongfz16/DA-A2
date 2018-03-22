@@ -10,7 +10,7 @@ using namespace std;
 
 enum options
 {
-	COPY=0,
+	COPY=0 ,
 	REPLACE,
 	DELETE,
 	INSERT,
