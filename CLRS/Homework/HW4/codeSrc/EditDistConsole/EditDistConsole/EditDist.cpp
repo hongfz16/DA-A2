@@ -53,3 +53,81 @@ void EditDist(string x, string y, int m, int n, int ** costtable, int ** op,int*
 		}
 	}
 }
+
+vector<int> Construct(int ** op, int m, int n)
+{
+	vector<int> reops;
+	int i = m - 1;
+	int j = n - 1;
+	while (i != 0 && j != 0)
+	{
+		reops.insert(reops.begin(), op[i][j]);
+		if (op[i][j] == COPY || op[i][j] == REPLACE)
+		{
+			--i;
+			--j;
+		}
+		else if (op[i][j] == DELETE)
+		{
+			--i;
+		}
+		else if (op[i][j] == INSERT)
+		{
+			--j;
+		}
+		else if (op[i][j] == TWIDDLE)
+		{
+			i -= 2;
+			j -= 2;
+		}
+		else if (op[i][j] >= KILL)
+		{
+			i = op[i][j] - KILL;
+			reops[0] = KILL;
+		}
+	}
+	return reops;
+}
+
+vector<pair<string, string> > ShowProc(string x, string y, vector<int> ops)
+{
+	vector<pair<string, string> > re;
+	string partx;
+	string party;
+	int m = 1, n = 1;
+	for (int i = 0; i < ops.size(); ++i)
+	{
+		if (ops[i] == COPY || ops[i] == REPLACE)
+		{
+			partx += x[m];
+			party += y[n];
+			++m; ++n;
+		}
+		else if (ops[i] == INSERT)
+		{
+			party += y[n];
+			++n;
+		}
+		else if (ops[i] == DELETE)
+		{
+			partx += x[m];
+			++m;
+		}
+		else if (ops[i] == TWIDDLE)
+		{
+			partx += x[m];
+			partx += x[m + 1];
+			party += y[n];
+			party += y[n + 1];
+			m += 2;
+			n += 2;
+		}
+		else if (ops[i] == KILL)
+		{
+			partx = x.substr(1,x.length());
+			party = y.substr(1,y.length());
+		}
+		re.push_back(pair<string, string>(partx, party));
+	}
+	return re;
+}

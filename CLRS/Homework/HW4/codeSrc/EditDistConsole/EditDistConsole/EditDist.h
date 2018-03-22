@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -10,7 +11,7 @@ using namespace std;
 
 enum options
 {
-	COPY=0 ,
+	COPY=0,
 	REPLACE,
 	DELETE,
 	INSERT,
@@ -19,6 +20,10 @@ enum options
 };
 
 void EditDist(string x, string y, int m, int n, int** costtable, int** op,int* cost);
+
+vector<int> Construct(int** op, int m, int n);
+
+vector<pair<string, string> > ShowProc(string x, string y, vector<int> ops);
 
 
 
