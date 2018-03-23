@@ -8,10 +8,10 @@
 \usepackage{geometry}
 \usepackage{fontspec,xltxtra,xunicode}
 \usepackage{setspace}
-\usepackage{algorithm}  
-\usepackage{algorithmicx}  
-\usepackage{algpseudocode}  
-  
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+
 %\floatname{algorithm}{OPTIMAL-BST}
 \renewcommand{\algorithmicrequire}{\textbf{输入:}}
 \renewcommand{\algorithmicensure}{\textbf{输出:}}
@@ -42,9 +42,9 @@
   	由数学归纳法可知$a_i=\sqrt{\frac{i}{n}},0\leq i \leq n-1$\\
   	则按照上面描述的半径序列取出同心圆环作为“桶”，则可以达到$\Theta(n)$的排序复杂度。
   \section*{Ex15.5-4 \textbf{解：}}
-    \begin{algorithm}  
+    \begin{algorithm}
         \caption{OPTIMAL-BST-IMPROVED}
-        \begin{algorithmic}[1]  
+        \begin{algorithmic}[1]
             \Require $p,q,n$
             \Ensure $e,root$
             \Function {OPTIMAL-BST-IMPROVED}{$p,q,n$}
