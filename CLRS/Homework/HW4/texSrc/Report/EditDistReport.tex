@@ -2,37 +2,37 @@
 %!TEX TS-program = xelatex
 %!TEX encoding = UTF-8 Unicode
 
-\documentclass[12pt]{article}
+%\documentclass[12pt]{article}
+%\usepackage{amsmath}
+%\usepackage{hyperref}
+%\usepackage{geometry}
+%\usepackage{fontspec,xltxtra,xunicode}
+%\usepackage{booktabs}
+%\usepackage{float}
+%\usepackage{changepage}
+%\usepackage{setspace}
+%\usepackage{listings}
+
+\documentclass{article}
 \usepackage{amsmath}
-\usepackage{hyperref}
 \usepackage{geometry}
-\usepackage{fontspec,xltxtra,xunicode}
+\usepackage{CJK}
+\usepackage{ctex}
+\usepackage{graphicx}
 \usepackage{booktabs}
-\usepackage{float}
-\usepackage{changepage}
-\usepackage{setspace}
+\usepackage{pst-node}
+\usepackage{pst-text}
+\usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage[colorlinks]{hyperref}
+\usepackage{color}
+\usepackage{hyperref}
 
-% \documentclass{article}
-% \usepackage{amsmath}
-% \usepackage{geometry}
-% %\usepackage{CJK}
-% %\usepackage{ctex}
-% \usepackage{graphicx}
-% \usepackage{booktabs}
-% \usepackage{pst-node}
-% \usepackage{pst-text}
-% \usepackage{amsmath}
-% \usepackage{amssymb}
-% \usepackage{listings}
-% \usepackage{fancyhdr}
-% \usepackage[colorlinks]{hyperref}
-% \usepackage{color}
-% \usepackage{hyperref}
-
-\defaultfontfeatures{Mapping=tex-text}
-\setromanfont{Heiti SC}
-\XeTeXlinebreaklocale “zh”
+%\defaultfontfeatures{Mapping=tex-text}
+%\setromanfont{Heiti SC}
+%\XeTeXlinebreaklocale “zh”
 
 % \definecolor{gray}{rgb}{0.4,0.4,0.4}
 % \definecolor{darkblue}{rgb}{0.0,0.0,0.6}
@@ -47,6 +47,7 @@
 
 \begin{document}
   \maketitle
+  \setlength\parindent{0em}
   \section*{1. 实验目的}
   a. 实现计算编辑距离的算法，重构出编辑过程，并且给出方便测试的用户界面\\
   b. 给出编辑距离算法与最优对齐问题的等价性
@@ -75,4 +76,5 @@
   \section*{6. 实验结果}
   得到一个方便测试的计算编辑距离算法的图形界面，操作方式如下：在$Source String$和$Target String$两栏中分别填入需要计算编辑距离的两个字符串，在接下去的六个框中填入用户需要的各操作的代价，点击$Calculate$按钮，将会给出编辑距离，并且给出每一步的具体操作以及操作结果。
   \section*{7. 源代码与可执行文件说明}
+  源代码存放在$src/EditDistQt/$文件夹下，可执行文件存放在$bin/EditDistGUI$
 \end{document}
