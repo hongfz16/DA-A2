@@ -1,29 +1,49 @@
-﻿\documentclass{article}
-\usepackage{amsmath}
-\usepackage{geometry}
-\usepackage{CJK}
-\usepackage{ctex}
-\usepackage{graphicx}
-\usepackage{booktabs}
-\usepackage{pst-node}
-\usepackage{pst-text}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{listings}
-\usepackage{fancyhdr}
-\usepackage[colorlinks]{hyperref}
-\usepackage{color}
-\usepackage{hyperref}
+﻿%!TEX program = xelatex
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
 
-\definecolor{gray}{rgb}{0.4,0.4,0.4}
-\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
-\definecolor{cyan}{rgb}{0.0,0.6,0.6}
-\definecolor{grey}{rgb}{0.7,0.7,0.7}
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{fontspec,xltxtra,xunicode}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{changepage}
+\usepackage{setspace}
+\usepackage{listings}
+
+% \documentclass{article}
+% \usepackage{amsmath}
+% \usepackage{geometry}
+% %\usepackage{CJK}
+% %\usepackage{ctex}
+% \usepackage{graphicx}
+% \usepackage{booktabs}
+% \usepackage{pst-node}
+% \usepackage{pst-text}
+% \usepackage{amsmath}
+% \usepackage{amssymb}
+% \usepackage{listings}
+% \usepackage{fancyhdr}
+% \usepackage[colorlinks]{hyperref}
+% \usepackage{color}
+% \usepackage{hyperref}
+
+\defaultfontfeatures{Mapping=tex-text}
+\setromanfont{Heiti SC}
+\XeTeXlinebreaklocale “zh”
+
+% \definecolor{gray}{rgb}{0.4,0.4,0.4}
+% \definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+% \definecolor{cyan}{rgb}{0.0,0.6,0.6}
+% \definecolor{grey}{rgb}{0.7,0.7,0.7}
 
 \title{Homework4 Solution}
 \author{洪方舟\\2016013259\\Email: \href{mailto:hongfz16@163.com}{hongfz16@163.com}}
 \date{\today}
 \geometry{left=2cm,right=2cm,top=2cm,bottom=2cm}
+
 \begin{document}
   \maketitle
   \section*{Problem 16-2}
@@ -39,14 +59,14 @@
             使用最短剩余时间调度算法，伪代码如下
             \begin{lstlisting}{xml}
             function SRTF(S)
-                let tc=1, pc=\infty ,idc=-1
+                let tc=1, pc=MAX_NUM ,idc=-1
                 let result[] be an empty array
                 while not S.empty()
                     for i in S.size()
-                        if tc \geq S[i].r and pc > S[i].p
-                            if pc \neq \infty and pc \neq 0
+                        if tc >= S[i].r and pc > S[i].p
+                            if pc != MAX_NUM and pc != 0
                                 for j in range(0,S.size()-1)
-                                    if S[i].p \leq pc and pc \leq S[i+1].p
+                                    if S[i].p <= pc and pc <= S[i+1].p
                                         S.insert(s(r=0,p=pc),i)
                                         break
                             pc=S[i].p
@@ -63,6 +83,27 @@
             如果令$T$为完成所有任务所需的时间总长度，则外层$while$需要循环$T$次，内层$for$循环耗时$O(n)$，因此总的时间复杂度为$O(nT)$
   \section*{Problem 16-5}
     \subsection*{a.}
+        使用$Farthest in Future$算法，伪代码如下
+        \begin{lstlisting}{xml}
+        function FFSchedule(R,k)
+            let cache[k] be hashtable initalized with random ri
+            let schedule[n] be new array
+            for i in range(0,n)
+                if R[i] in cache
+                    schedule[i]=READ_FROM_CACHE
+                else
+                    for j=n to i+1
+                        if R[j] in cache
+                            schedule[i]=EVICT(R[j])
+            return schedule
+        \end{lstlisting}
+        哈希表操作时间为$O(1)$，一共两重循环各$O(n)$，因此总的时间复杂度为$O(n^2)$
     \subsection*{b.}
+        定义$R$为请求序列，$S_{ij}$为对请求序列中从$i$到$j$的请求进行的操作序列，$T_{ij}$表示$S_{ij}$中$Cache Miss$的次数。考虑对$R_{in}$的规划，若$S_{in}$为最优的调度算法：若此时$R[i]$在$Cache$中，那么此时$T_{in}=T_{(i+1)n}$，也即此时$S_{in}$中必然包含$S_{(i+1)n}$的最优子问题；若此时$R[i]$不在$Cache$中，那么就产生一次$Cache Miss$，则此时$T_{in}=1+T_{(i+1)n}$，也即此时$S_{in}$包含$S_{(i+1)n}$的最优子问题。综上，该问题具有最优子结构。
     \subsection*{c.}
+        假设$S_{FF}$为按照$Farthest in Future$规则规划的序列，$S^*$为具有最少$Cache Miss$的序列；下面证明，可以通过不增加$Cache Miss$数的一个过程将$S^*$转化为$S_{FF}$；为了证明这个命题，下面证明一个该命题的递推版本：假设$S$为与$S_{FF}$前$j$个操作相同的序列，那么存在$S'$使得它与$S_{FF}$的前$j+1$个操作相同，但是$Cache Miss$数不多于$S$。\\
+        设$d=d_{j+1}$，如果$d$存在于$S$和$S_{FF}$的$Cache$中，或者$d$不存在与两者的$Cache$中，但是$S$和$S_{FF}$在第$j+1$步弹出了相同的元素，那么此时$S,S',S_{FF}$在前$j+1$个操作中均相同。\\
+        如果$d$不在$S$的$Cache$中，并且$S$弹出$f$，$S_{FF}$弹出$e \neq f$，下面就要找出一个$S'$，使得在第$k>j$次操作之后拥有和$S$第$k$次操作之后相同的$Cache$，在此之后只需要采取和$S$一致的操作就可以实现$k$次操作之后的操作中$Cache Miss$数和$S$相同，下面只需要说明在$j$到$k$之间做的一系列构造，使得$S'$在第$j+1$次操作和$S_{FF}$一样，并且$Cache Miss$数不多于$S$。\\
+        考虑$d'=d_{j+2}$；若$d'\neq e,f$，且$S$此时弹出$e$，那么此时让$S'$弹出$f$，则此时$S'$和$S$有相同的$Cache$；若$S$弹出$h \neq e$，那么让$S'$也弹出$h$，重复本步骤继续往下找；若$d'=f$，且$S$弹出$e$，那么此时$S'$无需做任何操作已经达到相同$Cache$；若$S$弹出$e' \neq e$，那么让$S'$同样也弹出$e'$，那么也可以达到相同$Cache$。\\
+        综上，已经证明了“假设$S$为与$S_{FF}$前$j$个操作相同的序列，那么存在$S'$使得它与$S_{FF}$的前$j+1$个操作相同，但是$Cache Miss$数不多于$S$”的命题，那么只需要递归的构造下去，总可以将$S^*$转化为$S_{FF}$，并且不增加$Cache Miss$，那么就可以说明$Farthest in Future$方法是最优的。
 \end{document}
