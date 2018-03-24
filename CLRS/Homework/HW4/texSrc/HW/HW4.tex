@@ -48,6 +48,7 @@
                                 for j in range(0,S.size()-1)
                                     if S[i].p \leq pc and pc \leq S[i+1].p
                                         S.insert(s(r=0,p=pc),i)
+                                        break
                             pc=S[i].p
                             idc=i
                             break
