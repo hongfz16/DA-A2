@@ -67,10 +67,10 @@
                         if tc >= S[i].r and pc > S[i].p
                             if pc != MAX_NUM and pc != 0
                                 for j in range(0,S.size()-1)
-                                    if S[i].p <= pc and pc <= S[i+1].p
+                                    if S[j].p <= pc and pc <= S[j+1].p
                                         S.insert(s(r=0,p=pc),i)
                                         break
-                            pc=S[i].p
+                            pc=S.delete(i).p
                             idc=i
                             break
                     tc+=1
