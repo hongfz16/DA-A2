@@ -130,15 +130,32 @@
   				\li \Do i=i+1
   				\End
   				\li Delete $A_{index}[result]$
-  				\li Insert $A_i[2^i-1]$ in $A_index$ so that $A_index$ is still ordered
+  				\li Insert $A_i[2^i-1]$ in $A_{index}$ so that $A_{index}$ is still ordered
   				\li let $count=0$
   				\li \For $j=0$ to $i-1$
-  				\li \Then \For $k=0$ to $2^j-2$
+  				\li \Then \For $k=0$ to $2^j-1$
   				\li \Then $A_j[k]=A_i[count]$
   				\li $count=count+1$
   				\End
   				\End
   			\end{codebox}
-  			调用$\proc{SEARCH}$耗时$O(\lg^2{n})$，找到第一个非空数组耗时$O(n)$，插入新的元素耗时$O(n)$，重新整理数据耗时$O(n)$，因此运行时间为$O(n)$
+  			调用$\proc{SEARCH}$耗时$O(\lg^2{n})$，找到第一个非空数组耗时$O(\lg n)$，插入新的元素耗时$O(n)$，重新整理数据耗时$O(n)$，因此运行时间为$O(n)$
   	\section*{Problem 19-3}
+  		\subsection*{a.}
+  			\begin{codebox}
+  				\Procname{\proc{FIB-HEAP-CHANGE-KEY}(H,x,k)}
+  				\li \If $k<x.key$
+  				\li \Then $\proc{FIB-HEAP-DECREASE-KEY}(H,x,k)$
+  				\End
+  				\li \If $k=x.key$
+  				\li \Then $\proc{Return}$
+  				\End
+  				\li $\proc{FIB-HEAP-DELETE}(H,x)$
+  				\li $\proc{FIB-HEAP-INSERT}(H,k)$
+  			\end{codebox}
+  			当$k>x.key$时，删除操作摊还时间$O(\lg{n})$，插入操作摊还时间$O(1)$，则总的摊还时间为$O(\lg{n})$ \\
+  			当$k=x.key$时，摊还时间为$O(1)$ \\
+  			当$k<x.key$时，减值操作摊还时间$O(1)$
+  		\subsection*{b.}
+  			
 \end{document}
