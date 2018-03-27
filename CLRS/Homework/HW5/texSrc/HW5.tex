@@ -1,0 +1,144 @@
+%!TEX program = xelatex
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
+
+%\documentclass[12pt]{article}
+%\usepackage{amsmath}
+%\usepackage{hyperref}
+%\usepackage{geometry}
+%\usepackage{fontspec,xltxtra,xunicode}
+%\usepackage{booktabs}
+%\usepackage{float}
+%\usepackage{changepage}
+%\usepackage{setspace}
+%\usepackage{listings}
+
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{geometry}
+\usepackage{CJK}
+\usepackage{ctex}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{pst-node}
+\usepackage{pst-text}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage[colorlinks]{hyperref}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{clrscode}
+
+%\defaultfontfeatures{Mapping=tex-text}
+%\setromanfont{Heiti SC}
+%\XeTeXlinebreaklocale “zh”
+
+% \definecolor{gray}{rgb}{0.4,0.4,0.4}
+% \definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+% \definecolor{cyan}{rgb}{0.0,0.6,0.6}
+% \definecolor{grey}{rgb}{0.7,0.7,0.7}
+
+\title{Homework5 Solution}
+\author{洪方舟\\2016013259\\Email: \href{mailto:hongfz16@163.com}{hongfz16@163.com}}
+\date{\today}
+\geometry{left=2cm,right=2cm,top=2cm,bottom=2cm}
+
+\begin{document}
+  \maketitle
+  \setlength\parindent{0em}
+  \section*{Problem 17.4-2}
+  	可以将势函数展开为如下形式：
+  	\begin{equation*}
+  		\Phi(T)=\left\{
+  		\begin{array}{rcl}
+  		2T.num-T.size &	& {\alpha \geq \frac{1}{2}} \\
+  		T.size-2T.num &	& {\alpha < \frac{1}{2}}
+  		\end{array}
+  		\right.
+  	\end{equation*}
+  	若$\alpha_i \geq \frac{1}{2}$，则有$T.num(i)=T.num(i-1)-1$且$T.size(i)=T.size(i-1)$，因此
+  	\begin{align*}
+	  	\hat{c_i} &= 1+2T.num(i)-T.size(i)-2T.num(i-1)+T.size(i-1) \\
+	  	&= 1-2 \\
+	  	&= -1
+  	\end{align*}
+  	若$\alpha_i<\frac{1}{2}$，如果此时发生表收缩，则$T.num(i)=T.num(i-1)-1$且$T.size(i)=\frac{2}{3}T.size(i-1)-1$，因此
+  	\begin{align*}
+	  	\hat{c_i} &= T.num(i)+1+T.size(i)-2T.num(i)-T.size(i-1)+2T.num(i-1) \\
+	  	&= T.num(i-1)-\frac{1}{3}T.size(i-1) \\
+	  	&= \Theta(1)
+  	\end{align*}
+  	若$\alpha_i<\frac{1}{2}$，如果此时未发生表收缩，则$T.num(i)=T.num(i-1)-1$且$T.size(i)=T.size(i-1)$，因此
+  	\begin{align*}
+	  	\hat{c_i} &= 1+T.size(i)-2T.num(i)-T.size(i-1)+2T.num(i-1) \\
+	  	&= 3
+  	\end{align*}
+  	综上，使用此策列，$TABLE-DELETE$操作的摊还代价的上届是一个常数。
+  	
+  	\section*{Problem 17-2}
+  		\subsection*{a.}
+	  		\begin{codebox}
+  				\Procname{\proc{SEARCH}(A, x)}
+  				\li let $index=-1$,$result=-1$
+  				\li \For $i=0$ to $k$
+  				\li \Do \If $A_i[0] \geq x$
+  				\li \Then $result=$\proc{Binary-search}($A_i,x$)
+  				\li \If $result \neq -1$
+  				\li \Then $index=i$
+  				\li \proc{Break}
+  				\End
+  				\End
+  				\End
+  				\li \proc{Return} $\{index,result\}$
+  			\end{codebox}
+  			最坏情况下需要搜索所有$k$个集合，每个集合使用二分法复杂度为$O(\lg n)$，则最坏情况下总的运行时间为$O(\lg^2 n)$
+  		\subsection*{b.}
+  			\begin{codebox}
+  				\Procname{\proc{INSERT}(A, x)}
+  				\li \If $\lceil\lg{n+1}\rceil > k$
+  				\li \Then let $A_{k}$ be new array
+  				\End
+  				\li let $i=0$
+  				\li let $B_0$ be new array containing $x$
+  				\li \While $A_i$ not empty
+  				\li \Do $B_{i+1}=\proc{Merge}(A_i,B_i)$
+  				\li let $A_i$ be empty array
+  				\li $i=i+1$
+  				\End
+  				\li $A_i=B_i$
+  			\end{codebox}
+  			最坏情况下，需要将$A_0$到$A_{k-1}$全部归并为$A_k$，此时运行时间为$\sum_{i=1}^{k-1}2^i=\Theta(2^k)=\Theta(n)$ \\
+  			下面分析摊还时间，定义势函数为$\Phi(D_i)=\lg{n}*b_i$，其中$b_i$为第$i$次操作之后装满元素的数组的个数，假设第$i$次操作一共归并了$t_i$个数组，则有$b_i=b_{i-1}-t_i+1$，因此有
+  			\begin{align*}
+	  			\hat{c_i} &= c_i+\Phi(D_i)-\Phi(D_{i-1}) \\
+	  			&= \lg{n}*t_i + \lg{n}*b_i-\lg{n}*b_{i-1} \\
+	  			&= \lg{n}*t_i+\lg{n}*(1-t_i) \\
+	  			&= \lg{n}
+  			\end{align*}
+  			因此该插入算法的摊还时间为$\lg{n}$
+  		\subsection*{c.}
+  			\begin{codebox}
+  				\Procname{\proc{DELETE}(A,x)}
+  				\li let $\{index,result\}=\proc{SEARCH}(A,x)$
+  				\li \If $index=-1$
+  				\li \Then $\proc{Error}$ "Cannot find x in A"
+  				\End
+  				\li let $i=0$
+  				\li \While $A_i$ is empty
+  				\li \Do i=i+1
+  				\End
+  				\li Delete $A_{index}[result]$
+  				\li Insert $A_i[2^i-1]$ in $A_index$ so that $A_index$ is still ordered
+  				\li let $count=0$
+  				\li \For $j=0$ to $i-1$
+  				\li \Then \For $k=0$ to $2^j-2$
+  				\li \Then $A_j[k]=A_i[count]$
+  				\li $count=count+1$
+  				\End
+  				\End
+  			\end{codebox}
+  			调用$\proc{SEARCH}$耗时$O(\lg^2{n})$，找到第一个非空数组耗时$O(n)$，插入新的元素耗时$O(n)$，重新整理数据耗时$O(n)$，因此运行时间为$O(n)$
+  	\section*{Problem 19-3}
+\end{document}
