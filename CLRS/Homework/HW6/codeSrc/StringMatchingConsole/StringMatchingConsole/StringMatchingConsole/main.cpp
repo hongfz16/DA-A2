@@ -4,6 +4,7 @@
 
 #include"Naive.h"
 #include"KMP.h"
+#include"BoyerMoore.h"
 
 using namespace std;
 
@@ -43,13 +44,33 @@ void TestKMPFindAll(string& pattern, string& text)
 	cout << endl << "==========" << endl;
 }
 
+void TestBMFindFirst(string& pattern, string& text)
+{
+	int ans = BMFindFirst(pattern, text);
+	cout << "Test BM Find First: " << ans << endl;
+	cout << "==========" << endl;
+}
+
+void TestBMFindAll(string& pattern, string& text)
+{
+	vector<int> Ans = BMFindAll(pattern, text);
+	cout << "Test BM Find All: ";
+	for (const int& ans : Ans)
+	{
+		cout << ans << " ";
+	}
+	cout << endl << "==========" << endl;
+}
+
 int main()
 {
-	string pattern = "ab";
-	string text = "abaiafahlaksdfjsdjncdbkasbabfabbasdbfajsfkbasfjbsfjdjkbatga";
+	string pattern = "au";
+	string text = "auisdfaauaousdfhaauaauuasuauayhfuiaauauuuahsdfuiahsifhas";
 	TestNaiveFindFirst(pattern, text);
 	TestNaiveFindAll(pattern, text);
 	TestKMPFindFirst(pattern, text);
 	TestKMPFindAll(pattern, text);
+	TestBMFindFirst(pattern, text);
+	TestBMFindAll(pattern, text);
 	return 0;
 }

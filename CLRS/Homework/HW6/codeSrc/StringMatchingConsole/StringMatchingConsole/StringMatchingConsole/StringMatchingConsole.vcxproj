@@ -145,8 +145,10 @@
     <ClCompile Include="KMP.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Naive.cpp" />
+    <ClCompile Include="BoyerMoore.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BoyerMoore.h" />
     <ClInclude Include="KMP.h" />
     <ClInclude Include="Naive.h" />
   </ItemGroup>
