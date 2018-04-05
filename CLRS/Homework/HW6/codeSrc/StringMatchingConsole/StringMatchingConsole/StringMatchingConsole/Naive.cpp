@@ -21,7 +21,10 @@ int NaiveFindFirst(string & pattern, string & text)
 		if (m == patternlen)
 			break;
 	}
-	return firstplace;
+	if (m == patternlen)
+		return firstplace;
+	else
+		return -1;
 }
 
 vector<int> NaiveFindAll(string & pattern, string & text)

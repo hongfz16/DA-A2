@@ -21,9 +21,15 @@
     <ClCompile Include="Naive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="KMP.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Naive.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="KMP.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

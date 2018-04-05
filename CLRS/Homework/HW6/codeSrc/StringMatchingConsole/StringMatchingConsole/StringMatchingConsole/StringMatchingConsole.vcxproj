@@ -142,10 +142,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="KMP.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Naive.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="KMP.h" />
     <ClInclude Include="Naive.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
