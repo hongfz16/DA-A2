@@ -125,4 +125,8 @@ void MainWindow::findallclicked()
         }
         resulttext->setText(result);
     }
+    else
+    {
+        resulttext->setText(result);
+    }
 }

@@ -8,6 +8,7 @@
 
 using namespace std;
 
+extern string characters;
 
 int BMFindFirst(string& pattern, string& text);
 vector<int> BMFindAll(string& pattern, string& text);
