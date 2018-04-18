@@ -53,7 +53,64 @@
   \indent 给定一个图$G=(V,E)$，不妨假设图$G$中没有孤立点，那么构造集合$X=E$，通过下面的规则给出集合$X$上待选择的所有集合$S_i$：如果$e_1,e_2 \in E$，且$e_1,e_2$至少共享同一个顶点，那么$e_1,e_2 \in S_i$。那么顶点覆盖问题的一个解就可以通过如下规则转化为集合覆盖问题的解：每个被选入的顶点，与之相连的所有边构成的集合$S_i$就被选入，最后在图$G$中所有的边都被覆盖则在集合$X$中所有的元素都被覆盖，并且由顶点覆盖问题的最少选择的性质可知选出来的集合的数量也是最少的。\\
   \indent 从另一个方向考虑，给定一个集合$X$，以及若干子集$S_i$，构造图$G=(V,X)$，$\forall e_j \in S_i$，将$e_j$全都用一个点$v_i$连接。对于集合$X$的一个覆盖问题的解就可以通过如下规则转化为图$G$的顶点覆盖问题的解：如果$S_i$入选，则将通过$S_i$构造出来的顶点$v_i$选入，那么由于集合$X$中的元素与图$G$的边一一对应，则将集合中所有元素覆盖就意味着图中所有边被覆盖，又因为集合覆盖问题的最小选择的性质，则由之构造的顶点覆盖问题的解也是最优的。\\
   \indent 综上所述，由于顶点覆盖问题是$NP$完全的，并且可以从顶点覆盖问题归约到集合覆盖问题，因此集合覆盖问题也是$NP$完全的。\qed
+  \newpage
   \section*{Exercise 35.5-3}
-  
+  \noindent 时间复杂度为$O(\sum_{S\in \mathcal{F}}|S|)$的$GREEDY-SET-COVER$算法如下
+  \begin{codebox}
+  	\Procname{\proc{GREEDY-SET-COVER-IMPROVE}($\mathcal{F}$)}
+  	\li let $A$ be a new array with length of $Max(S.size)$
+  	\li \For $S \in \mathcal{F}$
+  	\li \Do add $S$ to $A[S.size]$
+  	\End
+  	\li let $L$ be a new array with length of $\cup_{S \in \mathcal{F}}S$
+  	\li \For $S\in \mathcal{F}$
+  	\li \Do \For $l \in S$
+  	\li \Do add $S$ to $L[l]$
+  	\End \End
+  	\li let $Result$ be an empty array
+  	\li let $Covered$ be an empty array
+  	\li let $curr=A.size$
+  	\li \While $curr>0$
+  	\li \Do \While $A[curr]==\emptyset \:\&\&\: curr\neq 0$
+  	\li \Do curr=curr-1 \End
+  	\li \If $curr==0$
+  	\li \Do \proc{BREAK} \End
+  	\li let $S_0$ be any element in $A[curr]$
+  	\li add $S_0$ to $Result$
+  	\li remove $S_0$ from $A[curr]$
+  	\li \For $l \in (S_0-Covered)$
+  	\li \Do \For $S \in L[l]$
+  	\li \Do remove $S$ from $A[S.size]$
+  	\li $S.size=S.size-1$
+  	\li add $S$ to $A[S.size]$
+  	\End
+  	\li add $l$ to $T$
+  	\End \End
+  	\li \proc{RETURN} $Result$
+  \end{codebox}
   \section*{Problem 27-2}
+  	\subsection*{a.}
+  	  \begin{codebox}
+  	  	\Procname{\proc{P-MATRIX-MULTIPLY-RECURSIVE-SPACE(C,A,B)}}
+  	  	\li let $n=A.rows$
+  	  	\li \If $n==1$
+  	  	\li \Do $c_{11}=c_{11}+a_{11}b_{11}$
+  	  	\li \Else partition $A,B,C$ into $n/2 * n/2$ submatrices $A_{11},A_{12},A_{21},A_{22},B_{11},B_{12},B_{21},B_{22},C_{11},C_{12},C_{21},C_{22}$
+  	  	\li spawn \proc{P-MATRIX-MULTIPLY-RECURSIVE-SPACE($C_{11},A_{11},B_{11}$)}
+  	  	\li spawn \proc{P-MATRIX-MULTIPLY-RECURSIVE-SPACE($C_{12},A_{11},B_{12}$)}
+  	  	\li spawn \proc{P-MATRIX-MULTIPLY-RECURSIVE-SPACE($C_{21},A_{21},B_{11}$)}
+  	  	\li \proc{P-MATRIX-MULTIPLY-RECURSIVE-SPACE($C_{22},A_{21},B_{12}$)}
+  	  	\li sync
+  	  	\li spawn \proc{P-MATRIX-MULTIPLY-RECURSIVE-SPACE($C_{11},A_{12},B_{21}$)}
+  	  	\li spawn \proc{P-MATRIX-MULTIPLY-RECURSIVE-SPACE($C_{12},A_{12},B_{22}$)}
+  	  	\li spawn \proc{P-MATRIX-MULTIPLY-RECURSIVE-SPACE($C_{21},A_{22},B_{21}$)}
+  	  	\li \proc{P-MATRIX-MULTIPLY-RECURSIVE-SPACE($C_{22},A_{22},B_{22}$)}
+  	  	\li sync
+  	  	\End
+  	  \end{codebox}
+  	\subsection*{b.}
+  	  \noindent 工作量$T_1(n)$，可由下递推式表达：$T_1(n)=8T_1(n/2)+\Theta(1)$，根据主定理可知工作量$T_1(n)=\Theta(n^3)$；\\
+  	  持续时间$T_{\infty}(n)$，可由下递推式表达：$T_{\infty}(n)=2T_{\infty}(n/2)+\Theta(1)$，根据主定理可知持续时间$T_{\infty}(n)=\Theta(n)$
+  	\subsection*{c.}
+  	  \indent 该算法的并行度为$\Theta(n^2)$，如果忽略符号$\Theta$中的常数因子，$1000*1000$的矩阵上的并行度为$10^6$，而使用书中描述的方法的并行度为$10^9/lg^2(1000)$，后者大约是前者的$20$倍。
 \end{document}
