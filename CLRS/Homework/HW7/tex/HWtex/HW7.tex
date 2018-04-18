@@ -1,0 +1,59 @@
+%!TEX program = xelatex
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
+
+%\documentclass[12pt]{article}
+%\usepackage{amsmath}
+%\usepackage{hyperref}
+%\usepackage{geometry}
+%\usepackage{fontspec,xltxtra,xunicode}
+%\usepackage{booktabs}
+%\usepackage{float}
+%\usepackage{changepage}
+%\usepackage{setspace}
+%\usepackage{listings}
+
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{geometry}
+\usepackage{CJK}
+\usepackage{ctex}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{pst-node}
+\usepackage{pst-text}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage[colorlinks]{hyperref}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{clrscode}
+\usepackage{amsthm}
+
+%\defaultfontfeatures{Mapping=tex-text}
+%\setromanfont{Heiti SC}
+%\XeTeXlinebreaklocale “zh”
+
+% \definecolor{gray}{rgb}{0.4,0.4,0.4}
+% \definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+% \definecolor{cyan}{rgb}{0.0,0.6,0.6}
+% \definecolor{grey}{rgb}{0.7,0.7,0.7}
+
+\title{Homework7}
+\author{洪方舟\\2016013259\\Email: \href{mailto:hongfz16@163.com}{hongfz16@163.com}}
+\date{\today}
+\geometry{left=2cm,right=2cm,top=2cm,bottom=2cm}
+
+\begin{document}
+  \maketitle
+  \section*{Exercise 35.5-2}
+  \indent 首先如果给定一系列集合想要验证这些集合能否覆盖所有的元素，那么肯定是多项式时间的，因此该问题是$NP$问题。下面由顶点覆盖问题归约来证明集合覆盖问题是$NP$完全的。\\
+  \indent 给定一个图$G=(V,E)$，不妨假设图$G$中没有孤立点，那么构造集合$X=E$，通过下面的规则给出集合$X$上待选择的所有集合$S_i$：如果$e_1,e_2 \in E$，且$e_1,e_2$至少共享同一个顶点，那么$e_1,e_2 \in S_i$。那么顶点覆盖问题的一个解就可以通过如下规则转化为集合覆盖问题的解：每个被选入的顶点，与之相连的所有边构成的集合$S_i$就被选入，最后在图$G$中所有的边都被覆盖则在集合$X$中所有的元素都被覆盖，并且由顶点覆盖问题的最少选择的性质可知选出来的集合的数量也是最少的。\\
+  \indent 从另一个方向考虑，给定一个集合$X$，以及若干子集$S_i$，构造图$G=(V,X)$，$\forall e_j \in S_i$，将$e_j$全都用一个点$v_i$连接。对于集合$X$的一个覆盖问题的解就可以通过如下规则转化为图$G$的顶点覆盖问题的解：如果$S_i$入选，则将通过$S_i$构造出来的顶点$v_i$选入，那么由于集合$X$中的元素与图$G$的边一一对应，则将集合中所有元素覆盖就意味着图中所有边被覆盖，又因为集合覆盖问题的最小选择的性质，则由之构造的顶点覆盖问题的解也是最优的。\\
+  \indent 综上所述，由于顶点覆盖问题是$NP$完全的，并且可以从顶点覆盖问题归约到集合覆盖问题，因此集合覆盖问题也是$NP$完全的。\qed
+  \section*{Exercise 35.5-3}
+  
+  \section*{Problem 27-2}
+\end{document}
