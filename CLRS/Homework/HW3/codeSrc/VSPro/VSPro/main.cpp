@@ -128,16 +128,16 @@ int main()
 		printtime("Quick",time);
 		time=mergesorttest(num,50);
 		printtime("Merge",time);
-		if(i<=8)
-		{
-			time=shellsorttest(num);
-			printtime("Shell",time);
-		}
-		if(i<=5)
-		{
-			time=insertionsorttest(num);
-			printtime("Insertion",time);
-		}
+//		if(i<=8)
+//		{
+//			time=shellsorttest(num);
+//			printtime("Shell",time);
+//		}
+//		if(i<=5)
+//		{
+//			time=insertionsorttest(num);
+//			printtime("Insertion",time);
+//		}
 		cout<<"==============="<<endl;
 		if(num==100000000)
 			num*=2;
